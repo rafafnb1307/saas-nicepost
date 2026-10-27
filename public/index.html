@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NicePost — Posts com IA para LinkedIn, Instagram e X em segundos</title>
+  <meta name="description"
+    content="NicePost gera posts prontos para LinkedIn, Instagram, X e Facebook com o Google Gemini. Análise de imagens, tom de voz da sua marca e zero clichês.">
+  <meta name="theme-color" content="#050506">
+  <meta property="og:title" content="NicePost — Posts automáticos inteligentes">
+  <meta property="og:description" content="Copy de alta conversão para redes sociais, gerada por IA em segundos.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/views.css">
+
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js" defer></script>
+  <script type="module" src="/js/main.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#app">Pular para o conteúdo</a>
+
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient__grid"></div>
+    <div class="ambient__glow"></div>
+    <div class="ambient__noise"></div>
+  </div>
+
+  <!-- ======================= HEADER ======================= -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#/" class="brand" aria-label="NicePost — início">
+        <span class="brand__logo" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="9" fill="#fff" />
+            <path d="M10 22V10l12 12V10" stroke="#09090b" stroke-width="2.6" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span class="brand__name">Nice<span>Post</span></span>
+        <span class="badge badge--mono brand__tag">v2</span>
+      </a>
+
+      <nav class="nav" id="main-nav" aria-label="Navegação principal">
+        <span class="nav__indicator" aria-hidden="true"></span>
+        <a href="#/" data-route="landing" id="nav-landing">Início</a>
+        <a href="#/studio" data-route="studio" id="nav-studio">Estúdio</a>
+        <a href="#/dashboard" data-route="dashboard" id="nav-dashboard">Dashboard</a>
+        <a href="#/referrals" data-route="referrals" id="nav-referrals">Indicações</a>
+        <a href="#/settings" data-route="settings" id="nav-settings">System Prompt</a>
+      </nav>
+
+      <div class="header__actions">
+        <button class="btn btn--primary btn--sm" id="btn-open-auth" data-action="open-auth" hidden>
+          <i data-lucide="log-in"></i><span>Entrar</span>
+        </button>
+
+        <div class="user-menu" id="user-menu" hidden>
+          <button class="user-menu__trigger" id="user-menu-trigger" aria-haspopup="menu" aria-expanded="false">
+            <span class="avatar" id="user-avatar">N</span>
+            <span class="user-menu__meta">
+              <span class="user-menu__email" id="user-email">—</span>
+              <span class="user-menu__plan" id="user-plan">—</span>
+            </span>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="user-menu__dropdown" id="user-menu-dropdown" role="menu">
+            <div class="user-menu__credits">
+              <span class="eyebrow">Créditos do mês</span>
+              <strong id="user-credits">0 / 0</strong>
+              <div class="progress"><div class="progress__bar" id="user-credits-bar"></div></div>
+            </div>
+            <a href="#/dashboard" role="menuitem"><i data-lucide="layout-dashboard"></i>Dashboard</a>
+            <a href="#/" data-action="scroll-pricing" role="menuitem"><i data-lucide="sparkles"></i>Fazer upgrade</a>
+            <button data-action="logout" role="menuitem" class="is-danger"><i data-lucide="log-out"></i>Sair</button>
+          </div>
+        </div>
+
+        <div class="skeleton header__skeleton" id="auth-skeleton" aria-hidden="true"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================= MAIN ======================= -->
+  <main id="app" class="app-main" tabindex="-1">
+
+    <!-- ============ 1. LANDING ============ -->
+    <section class="view" id="view-landing" data-view="landing" aria-labelledby="hero-title">
+      <div class="container">
+
+        <!-- Hero -->
+        <div class="hero">
+          <div class="hero__copy">
+            <span class="badge hero__badge reveal">
+              <span class="dot dot--pulse" style="color: var(--ok)"></span>
+              Powered by Google Gemini · Copy em português nativo
+            </span>
+            <h1 id="hero-title" class="hero__title reveal" style="--delay: 80ms">
+              Posts que <span class="serif">soam humanos</span>,<br>
+              <span class="gradient-text">gerados em segundos.</span>
+            </h1>
+            <p class="hero__lead muted reveal" style="--delay: 160ms">
+              Descreva a ideia, anexe uma imagem e receba uma copy pronta para LinkedIn, Instagram, X ou Facebook —
+              no tom da sua marca e sem os clichês de IA que todo mundo já reconhece.
+            </p>
+            <div class="hero__ctas reveal" style="--delay: 240ms">
+              <a href="#/studio" class="btn btn--primary btn--lg" id="hero-cta-primary">
+                Criar meu primeiro post grátis <i data-lucide="arrow-right"></i>
+              </a>
+              <a href="#pricing" class="btn btn--lg" data-action="scroll-pricing" id="hero-cta-pricing">Ver planos</a>
+            </div>
+            <ul class="hero__proof reveal" style="--delay: 320ms">
+              <li><i data-lucide="check"></i>3 posts grátis</li>
+              <li><i data-lucide="check"></i>Sem cartão de crédito</li>
+              <li><i data-lucide="check"></i>Cancele quando quiser</li>
+            </ul>
+          </div>
+
+          <!-- Mockup animado -->
+          <div class="hero__visual reveal" style="--delay: 200ms" aria-hidden="true">
+            <div class="mock">
+              <div class="mock__bar">
+                <span></span><span></span><span></span>
+                <em class="mono">nicepost.app/studio</em>
+              </div>
+              <div class="mock__body">
+                <div class="mock__prompt">
+                  <span class="eyebrow">Briefing</span>
+                  <p>Post sobre como suporte humanizado aumenta o LTV em SaaS B2B</p>
+                  <div class="mock__chips"><b>LinkedIn</b><i>Persuasivo</i><i>+ imagem</i></div>
+                </div>
+                <div class="mock__post">
+                  <div class="mock__author">
+                    <span class="avatar avatar--lg">MS</span>
+                    <div><strong>Marina Souza</strong><small>Head de CS · agora</small></div>
+                  </div>
+                  <p class="mock__typed" id="hero-typed"></p>
+                </div>
+              </div>
+            </div>
+            <div class="float-card float-card--a"><i data-lucide="zap"></i><span>Gerado em 3,2s</span></div>
+            <div class="float-card float-card--b"><i data-lucide="shield-check"></i><span>0 clichês detectados</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plataformas -->
+        <div class="platform-strip reveal" aria-label="Plataformas suportadas">
+          <span class="eyebrow">Formato nativo para</span>
+          <div class="platform-strip__list">
+            <span><i data-lucide="linkedin"></i>LinkedIn</span>
+            <span><i data-lucide="instagram"></i>Instagram</span>
+            <span><i data-lucide="twitter"></i>X / Twitter</span>
+            <span><i data-lucide="facebook"></i>Facebook</span>
+          </div>
+        </div>
+
+        <!-- Recursos -->
+        <section class="section" id="features" aria-labelledby="features-title">
+          <div class="section-head reveal">
+            <span class="eyebrow">Recursos</span>
+            <h2 id="features-title">Tudo o que um copywriter sênior faria. <span class="serif muted">Mais rápido.</span>
+            </h2>
+          </div>
+          <div class="grid grid-3 features">
+            <article class="card card--interactive card--spotlight reveal">
+              <span class="icon-tile"><i data-lucide="scan-eye"></i></span>
+              <h3>Análise multimodal</h3>
+              <p class="muted text-sm">Envie prints, fotos de produto ou infográficos. O Gemini lê o contexto visual e
+                escreve uma legenda conectada à imagem.</p>
+            </article>
+            <article class="card card--interactive card--spotlight reveal" style="--delay: 60ms">
+              <span class="icon-tile"><i data-lucide="audio-lines"></i></span>
+              <h3>Tom de voz da marca</h3>
+              <p class="muted text-sm">Defina público, voz e expressões proibidas uma vez. Todo post sai alinhado com a
+                sua identidade.</p>
+            </article>
+            <article class="card card--interactive card--spotlight reveal" style="--delay: 120ms">
+              <span class="icon-tile"><i data-lucide="shield-check"></i></span>
+              <h3>Anti-clichê &amp; anti-alucinação</h3>
+              <p class="muted text-sm">Regras invioláveis no servidor impedem dados inventados, promessas enganosas e
+                frases genéricas.</p>
+            </article>
+            <article class="card card--interactive card--spotlight reveal">
+              <span class="icon-tile"><i data-lucide="layout-template"></i></span>
+              <h3>Formato por plataforma</h3>
+              <p class="muted text-sm">Threads numeradas no X, ganchos antes do "ver mais" no Instagram, respiro e
+                autoridade no LinkedIn.</p>
+            </article>
+            <article class="card card--interactive card--spotlight reveal" style="--delay: 60ms">
+              <span class="icon-tile"><i data-lucide="history"></i></span>
+              <h3>Histórico na nuvem</h3>
+              <p class="muted text-sm">Seus posts ficam salvos na conta. Busque, filtre por rede e recopie em qualquer
+                dispositivo.</p>
+            </article>
+            <article class="card card--interactive card--spotlight reveal" style="--delay: 120ms">
+              <span class="icon-tile"><i data-lucide="gift"></i></span>
+              <h3>Programa de indicação</h3>
+              <p class="muted text-sm">Compartilhe seu link e ganhe posts extras a cada amigo que assinar um plano pago.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- Como funciona -->
+        <section class="section" aria-labelledby="how-title">
+          <div class="section-head reveal">
+            <span class="eyebrow">Como funciona</span>
+            <h2 id="how-title">Do briefing ao post em três passos</h2>
+          </div>
+          <ol class="steps">
+            <li class="reveal"><span class="steps__n mono">01</span>
+              <h3>Descreva a ideia</h3>
+              <p class="muted text-sm">Uma frase basta. Quanto mais contexto, melhor.</p>
+            </li>
+            <li class="reveal" style="--delay: 80ms"><span class="steps__n mono">02</span>
+              <h3>Escolha rede e tom</h3>
+              <p class="muted text-sm">Anexe uma imagem se quiser análise visual.</p>
+            </li>
+            <li class="reveal" style="--delay: 160ms"><span class="steps__n mono">03</span>
+              <h3>Copie e publique</h3>
+              <p class="muted text-sm">Texto em streaming, pronto para colar.</p>
+            </li>
+          </ol>
+        </section>
+
+        <!-- Planos -->
+        <section class="section" id="pricing" aria-labelledby="pricing-title">
+          <div class="section-head reveal">
+            <span class="eyebrow">Planos</span>
+            <h2 id="pricing-title">Preço simples. <span class="serif muted">Sem surpresas.</span></h2>
+            <p class="muted text-sm">Comece com 3 posts grátis. Faça upgrade quando fizer sentido.</p>
+          </div>
+
+          <div class="pricing" id="pricing-grid">
+            <article class="plan card reveal" data-plan="essential">
+              <header>
+                <span class="badge badge--mono">Essential</span>
+                <p class="plan__desc muted text-sm">Para criadores solo que querem constância.</p>
+              </header>
+              <div class="plan__price"><small>R$</small><strong>59</strong><span>,99</span><em>/mês</em></div>
+              <ul class="plan__features">
+                <li><i data-lucide="check"></i><b>15 posts</b> por mês</li>
+                <li><i data-lucide="check"></i>Análise multimodal de imagens</li>
+                <li><i data-lucide="check"></i>LinkedIn, Instagram, X e Facebook</li>
+                <li><i data-lucide="check"></i>Histórico na nuvem</li>
+              </ul>
+              <button class="btn btn--block" data-action="select-plan" data-plan="essential"
+                id="btn-plan-essential">Assinar Essential</button>
+            </article>
+
+            <article class="plan plan--featured card reveal" data-plan="pro" style="--delay: 80ms">
+              <span class="plan__ribbon">Mais popular</span>
+              <header>
+                <span class="badge badge--solid badge--mono">Pro</span>
+                <p class="plan__desc muted text-sm">Para profissionais e produtores ativos.</p>
+              </header>
+              <div class="plan__price"><small>R$</small><strong>99</strong><span>,99</span><em>/mês</em></div>
+              <ul class="plan__features">
+                <li><i data-lucide="check"></i><b>25 posts</b> por mês</li>
+                <li><i data-lucide="check"></i>Tudo do Essential</li>
+                <li><i data-lucide="check"></i>System Prompt personalizado</li>
+                <li><i data-lucide="check"></i>Programa de indicação completo</li>
+              </ul>
+              <button class="btn btn--primary btn--block" data-action="select-plan" data-plan="pro"
+                id="btn-plan-pro">Assinar Pro</button>
+            </article>
+
+            <article class="plan card reveal" data-plan="ultra" style="--delay: 160ms">
+              <header>
+                <span class="badge badge--mono">Ultra</span>
+                <p class="plan__desc muted text-sm">Para agências, gestores e marcas.</p>
+              </header>
+              <div class="plan__price"><small>R$</small><strong>119</strong><span>,99</span><em>/mês</em></div>
+              <ul class="plan__features">
+                <li><i data-lucide="check"></i><b>50 posts</b> por mês</li>
+                <li><i data-lucide="check"></i>Tudo do Pro</li>
+                <li><i data-lucide="check"></i>Prioridade na fila de geração</li>
+                <li><i data-lucide="check"></i>Suporte prioritário por e-mail</li>
+              </ul>
+              <button class="btn btn--block" data-action="select-plan" data-plan="ultra"
+                id="btn-plan-ultra">Assinar Ultra</button>
+            </article>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section" aria-labelledby="faq-title">
+          <div class="section-head reveal">
+            <span class="eyebrow">FAQ</span>
+            <h2 id="faq-title">Perguntas frequentes</h2>
+          </div>
+          <div class="faq reveal">
+            <details>
+              <summary>Meus dados e imagens ficam salvos?<i data-lucide="plus"></i></summary>
+              <p class="muted">As imagens são enviadas apenas para a geração e não são armazenadas. Guardamos somente o
+                texto gerado no seu histórico, que você pode apagar a qualquer momento.</p>
+            </details>
+            <details>
+              <summary>Os créditos acumulam?<i data-lucide="plus"></i></summary>
+              <p class="muted">Não. O limite renova no 1º dia de cada mês. Bônus de indicação somam ao limite mensal.</p>
+            </details>
+            <details>
+              <summary>Se a geração falhar, perco o crédito?<i data-lucide="plus"></i></summary>
+              <p class="muted">Não. O crédito só é consumido quando o post é entregue com sucesso — falhas são
+                estornadas automaticamente.</p>
+            </details>
+            <details>
+              <summary>Posso mudar de plano depois?<i data-lucide="plus"></i></summary>
+              <p class="muted">Sim, a qualquer momento. O novo limite vale imediatamente.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- CTA final -->
+        <section class="final-cta card reveal">
+          <h2>Seu próximo post <span class="serif">já está pronto.</span></h2>
+          <p class="muted">Só falta você pedir.</p>
+          <a href="#/studio" class="btn btn--primary btn--lg" id="final-cta">Abrir o Estúdio <i
+              data-lucide="arrow-right"></i></a>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============ 2. ESTÚDIO ============ -->
+    <section class="view" id="view-studio" data-view="studio" data-protected hidden aria-labelledby="studio-title">
+      <div class="container stack" style="--gap: var(--space-5)">
+        <div class="page-head">
+          <div>
+            <span class="eyebrow">Estúdio criativo</span>
+            <h1 id="studio-title" class="page-title">Gerar novo post</h1>
+          </div>
+          <div class="credit-pill" id="studio-credits" title="Créditos restantes neste mês">
+            <i data-lucide="coins"></i>
+            <span><strong id="studio-credits-value">—</strong> créditos</span>
+            <a href="#/" data-action="scroll-pricing" class="credit-pill__link">Upgrade</a>
+          </div>
+        </div>
+
+        <div class="studio">
+          <!-- Formulário -->
+          <form class="card studio__form stack" id="generator-form" style="--gap: var(--space-5)" novalidate>
+            <div class="field">
+              <label class="label" for="prompt-input">
+                Ideia central do post
+                <small id="prompt-count">0 / 4000</small>
+              </label>
+              <textarea id="prompt-input" class="textarea" rows="5" maxlength="4000" required
+                placeholder="Ex: Post persuasivo sobre como o atendimento humanizado no suporte aumenta o LTV de clientes SaaS B2B. Público: founders e heads de CS."></textarea>
+              <div class="prompt-ideas" id="prompt-ideas" aria-label="Sugestões de briefing">
+                <button type="button" data-idea="3 erros que destroem a conversão de landing pages B2B">💡 Erros de
+                  conversão</button>
+                <button type="button" data-idea="Bastidores de como nossa equipe pequena entrega como uma grande">🎬
+                  Bastidores</button>
+                <button type="button" data-idea="Lição que aprendi depois de perder meu maior cliente">📖
+                  Storytelling</button>
+              </div>
+            </div>
+
+            <fieldset class="field">
+              <legend class="label">Rede social</legend>
+              <div class="chips" id="platform-chips" role="radiogroup">
+                <label class="chip"><input type="radio" name="platform" value="LinkedIn" checked><span><i
+                      data-lucide="linkedin"></i>LinkedIn</span></label>
+                <label class="chip"><input type="radio" name="platform" value="Instagram"><span><i
+                      data-lucide="instagram"></i>Instagram</span></label>
+                <label class="chip"><input type="radio" name="platform" value="Twitter/X"><span><i
+                      data-lucide="twitter"></i>X / Twitter</span></label>
+                <label class="chip"><input type="radio" name="platform" value="Facebook"><span><i
+                      data-lucide="facebook"></i>Facebook</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="field">
+              <legend class="label">Tom de voz</legend>
+              <div class="chips" id="tone-chips" role="radiogroup">
+                <label class="chip"><input type="radio" name="tone" value="Profissional &amp; Técnico"
+                    checked><span>👔 Profissional</span></label>
+                <label class="chip"><input type="radio" name="tone" value="Descontraído &amp; Humano"><span>😄
+                    Descontraído</span></label>
+                <label class="chip"><input type="radio" name="tone" value="Persuasivo &amp; Vendedor"><span>🎯
+                    Persuasivo</span></label>
+                <label class="chip"><input type="radio" name="tone" value="Provocativo &amp; Storytelling"><span>🔥
+                    Storytelling</span></label>
+                <label class="chip"><input type="radio" name="tone" value="Inspirador &amp; Educativo"><span>🌱
+                    Educativo</span></label>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <span class="label">Imagem de referência <small>Opcional · PNG, JPG, WEBP</small></span>
+              <div class="dropzone" id="dropzone" tabindex="0" role="button"
+                aria-label="Enviar imagem de referência">
+                <input type="file" id="image-input" accept="image/png,image/jpeg,image/webp" hidden>
+                <div class="dropzone__empty" id="dropzone-empty">
+                  <span class="icon-tile"><i data-lucide="image-up"></i></span>
+                  <p><strong>Clique para enviar</strong> ou arraste aqui</p>
+                  <p class="hint">Otimizamos automaticamente para envio rápido · até 10MB</p>
+                </div>
+                <div class="dropzone__preview" id="dropzone-preview" hidden>
+                  <img id="image-preview" alt="Pré-visualização da imagem de referência">
+                  <div class="dropzone__meta">
+                    <span id="image-meta" class="text-xs mono">—</span>
+                    <button type="button" class="btn btn--sm btn--danger" id="btn-remove-image">
+                      <i data-lucide="trash-2"></i>Remover
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--lg btn--block" id="btn-generate">
+              <i data-lucide="sparkles"></i><span>Gerar post</span>
+              <span class="kbd btn__kbd">Ctrl ↵</span>
+            </button>
+          </form>
+
+          <!-- Resultado -->
+          <div class="card studio__output" id="output-card">
+            <div class="card__head">
+              <div class="card__title">
+                <span class="status-dot" id="output-status-dot" data-state="idle"></span>
+                <span id="output-status">Pronto para gerar</span>
+              </div>
+              <div class="row" style="--gap: 6px">
+                <button class="btn btn--sm btn--ghost" id="btn-regenerate" disabled title="Gerar novamente">
+                  <i data-lucide="refresh-cw"></i><span class="hide-sm">Refazer</span>
+                </button>
+                <button class="btn btn--sm" id="btn-copy-output" disabled>
+                  <i data-lucide="copy"></i><span>Copiar</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="post-preview" id="post-preview">
+              <div class="post-preview__author">
+                <span class="avatar avatar--lg" id="preview-avatar">N</span>
+                <div>
+                  <strong id="preview-name">Você</strong>
+                  <small id="preview-platform">LinkedIn · agora</small>
+                </div>
+              </div>
+
+              <div class="post-preview__body" id="output-body" aria-live="polite">
+                <div class="output-empty" id="output-empty">
+                  <span class="icon-tile"><i data-lucide="pen-line"></i></span>
+                  <p>Seu post aparecerá aqui, escrito em tempo real.</p>
+                </div>
+                <div class="output-skeleton" id="output-skeleton" hidden>
+                  <div class="skeleton skeleton-line" style="width: 82%"></div>
+                  <div class="skeleton skeleton-line" style="width: 64%"></div>
+                  <div class="skeleton skeleton-line" style="width: 90%; margin-top: 20px"></div>
+                  <div class="skeleton skeleton-line" style="width: 75%"></div>
+                  <div class="skeleton skeleton-line" style="width: 58%"></div>
+                  <div class="skeleton skeleton-line" style="width: 40%; margin-top: 20px"></div>
+                </div>
+                <div class="output-text" id="output-text"></div>
+              </div>
+            </div>
+
+            <footer class="output-foot">
+              <span id="output-chars" class="mono">0 caracteres</span>
+              <span id="output-limit" class="mono"></span>
+              <span id="output-model" class="mono subtle"></span>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. DASHBOARD ============ -->
+    <section class="view" id="view-dashboard" data-view="dashboard" data-protected hidden
+      aria-labelledby="dash-title">
+      <div class="container stack" style="--gap: var(--space-5)">
+        <div class="page-head">
+          <div>
+            <span class="eyebrow">Visão geral</span>
+            <h1 id="dash-title" class="page-title">Dashboard</h1>
+          </div>
+          <a href="#/studio" class="btn btn--primary" id="dash-new-post"><i data-lucide="plus"></i>Novo post</a>
+        </div>
+
+        <div class="grid grid-4 stats" id="dash-stats">
+          <div class="card stat">
+            <span class="eyebrow">Plano atual</span>
+            <strong class="stat__value" id="dash-plan">—</strong>
+            <span class="stat__hint" id="dash-plan-price">—</span>
+          </div>
+          <div class="card stat stat--usage">
+            <div class="usage-ring" id="dash-ring" style="--p: 0">
+              <svg viewBox="0 0 44 44" aria-hidden="true">
+                <circle cx="22" cy="22" r="19" class="usage-ring__track" />
+                <circle cx="22" cy="22" r="19" class="usage-ring__value" />
+              </svg>
+              <span id="dash-ring-label" class="mono">0%</span>
+            </div>
+            <div>
+              <span class="eyebrow">Posts no mês</span>
+              <strong class="stat__value mono" id="dash-usage">0 / 0</strong>
+              <span class="stat__hint" id="dash-reset">—</span>
+            </div>
+          </div>
+          <div class="card stat">
+            <span class="eyebrow">Tempo economizado</span>
+            <strong class="stat__value mono" id="dash-time">0 min</strong>
+            <span class="stat__hint">≈ 15 min por post</span>
+          </div>
+          <div class="card stat">
+            <span class="eyebrow">Caracteres gerados</span>
+            <strong class="stat__value mono" id="dash-chars">0</strong>
+            <span class="stat__hint" id="dash-top-platform">—</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__head history-head">
+            <div>
+              <h2 class="card__title"><i data-lucide="history"></i>Histórico de posts</h2>
+              <p class="subtle text-xs">Últimos 100 posts gerados na sua conta</p>
+            </div>
+            <div class="row row--wrap history-tools">
+              <div class="input-group history-search">
+                <input type="search" class="input" id="history-search" placeholder="Buscar no histórico…"
+                  aria-label="Buscar no histórico">
+                <span class="input-group__btn" aria-hidden="true"><i data-lucide="search"></i></span>
+              </div>
+              <select class="select" id="history-filter" aria-label="Filtrar por rede">
+                <option value="">Todas as redes</option>
+                <option>LinkedIn</option>
+                <option>Instagram</option>
+                <option>Twitter/X</option>
+                <option>Facebook</option>
+              </select>
+              <button class="btn btn--sm btn--danger" id="btn-clear-history"><i data-lucide="trash-2"></i>Limpar</button>
+            </div>
+          </div>
+          <ul class="history" id="history-list" aria-live="polite"></ul>
+        </div>
+
+        <div class="card">
+          <div class="card__head">
+            <h2 class="card__title"><i data-lucide="credit-card"></i>Gerenciar plano</h2>
+            <span class="badge" id="billing-mode-badge">Checkout simulado</span>
+          </div>
+          <div class="plan-switch" id="plan-switch"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. INDICAÇÕES ============ -->
+    <section class="view" id="view-referrals" data-view="referrals" data-protected hidden
+      aria-labelledby="ref-title">
+      <div class="container stack" style="--gap: var(--space-5)">
+        <div class="page-head">
+          <div>
+            <span class="eyebrow">Programa de afiliados</span>
+            <h1 id="ref-title" class="page-title">Indique &amp; ganhe posts</h1>
+          </div>
+        </div>
+
+        <div class="card referral-hero card--spotlight">
+          <span class="icon-tile icon-tile--xl"><i data-lucide="gift"></i></span>
+          <h2>Ganhe <span id="ref-bonus-per">+5</span> posts por amigo que assinar</h2>
+          <p class="muted text-sm">Compartilhe seu link exclusivo. Quando alguém se cadastrar por ele e assinar qualquer
+            plano pago, os créditos extras caem automaticamente na sua conta.</p>
+
+          <div class="ref-link" id="ref-link-box">
+            <i data-lucide="link-2"></i>
+            <span class="mono" id="ref-link">carregando…</span>
+            <button class="btn btn--primary btn--sm" id="btn-copy-ref"><i data-lucide="copy"></i>Copiar</button>
+          </div>
+          <div class="row row--wrap share-row">
+            <a class="btn btn--sm" id="share-whatsapp" target="_blank" rel="noopener"><i
+                data-lucide="message-circle"></i>WhatsApp</a>
+            <a class="btn btn--sm" id="share-linkedin" target="_blank" rel="noopener"><i
+                data-lucide="linkedin"></i>LinkedIn</a>
+            <a class="btn btn--sm" id="share-x" target="_blank" rel="noopener"><i data-lucide="twitter"></i>X</a>
+          </div>
+        </div>
+
+        <div class="grid grid-4 stats">
+          <div class="card stat"><span class="eyebrow">Cliques no link</span><strong class="stat__value mono"
+              id="ref-clicks">0</strong></div>
+          <div class="card stat"><span class="eyebrow">Cadastros</span><strong class="stat__value mono"
+              id="ref-signups">0</strong></div>
+          <div class="card stat"><span class="eyebrow">Assinaturas</span><strong class="stat__value mono"
+              id="ref-conversions">0</strong><span class="stat__hint" id="ref-rate">0% de conversão</span></div>
+          <div class="card stat"><span class="eyebrow">Bônus acumulado</span><strong class="stat__value mono"
+              id="ref-earned">+0</strong><span class="stat__hint">posts extras/mês</span></div>
+        </div>
+
+        <ol class="steps steps--compact">
+          <li><span class="steps__n mono">01</span>
+            <h3>Compartilhe</h3>
+            <p class="muted text-sm">Envie seu link para colegas e clientes.</p>
+          </li>
+          <li><span class="steps__n mono">02</span>
+            <h3>Eles se cadastram</h3>
+            <p class="muted text-sm">O código é aplicado automaticamente.</p>
+          </li>
+          <li><span class="steps__n mono">03</span>
+            <h3>Você ganha</h3>
+            <p class="muted text-sm">Bônus creditado na primeira assinatura paga.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ 5. SYSTEM PROMPT & SEGURANÇA ============ -->
+    <section class="view" id="view-settings" data-view="settings" data-protected hidden
+      aria-labelledby="settings-title">
+      <div class="container stack" style="--gap: var(--space-5)">
+        <div class="page-head">
+          <div>
+            <span class="eyebrow">Configurações da IA</span>
+            <h1 id="settings-title" class="page-title">System Prompt &amp; Segurança</h1>
+          </div>
+        </div>
+
+        <div class="settings">
+          <form class="card stack" id="settings-form" style="--gap: var(--space-5)" novalidate>
+            <div class="card__head" style="margin-bottom: 0">
+              <h2 class="card__title"><i data-lucide="sliders-horizontal"></i>Personalização da marca</h2>
+              <button type="button" class="btn btn--sm btn--ghost" id="btn-reset-settings"><i
+                  data-lucide="rotate-ccw"></i>Restaurar padrão</button>
+            </div>
+
+            <div class="grid grid-2" style="--gap: var(--space-4)">
+              <div class="field">
+                <label class="label" for="set-brand-name">Nome da marca / autor</label>
+                <input class="input" id="set-brand-name" name="brandName" maxlength="80"
+                  placeholder="Ex: Acme Analytics">
+              </div>
+              <div class="field">
+                <label class="label" for="set-audience">Público-alvo</label>
+                <input class="input" id="set-audience" name="audience" maxlength="300"
+                  placeholder="Ex: founders de SaaS B2B early-stage">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="set-brand-voice">Voz da marca <small>até 400 caracteres</small></label>
+              <textarea class="textarea" id="set-brand-voice" name="brandVoice" maxlength="400" rows="3"
+                placeholder="Ex: Direta, levemente irônica, usa analogias do dia a dia e evita jargão corporativo."></textarea>
+            </div>
+
+            <div class="grid grid-2" style="--gap: var(--space-4)">
+              <div class="field">
+                <span class="label">Uso de emojis</span>
+                <div class="segmented" role="radiogroup">
+                  <label><input type="radio" name="emojiLevel" value="none"><span>Nenhum</span></label>
+                  <label><input type="radio" name="emojiLevel" value="moderate"><span>Moderado</span></label>
+                  <label><input type="radio" name="emojiLevel" value="high"><span>Expressivo</span></label>
+                </div>
+              </div>
+              <div class="field">
+                <span class="label">Hashtags</span>
+                <label class="switch">
+                  <input type="checkbox" name="useHashtags" id="set-hashtags">
+                  <span class="switch__track"></span>
+                  <span class="muted">Incluir hashtags automaticamente</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="set-banned">Expressões proibidas (anti-clichê) <small>separe por
+                  vírgula</small></label>
+              <div class="tag-input" id="banned-tags">
+                <input id="set-banned" class="tag-input__field" placeholder="Digite e pressione Enter…">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="set-custom-rules">Regras extras <small id="rules-count">0 /
+                  1500</small></label>
+              <textarea class="textarea mono" id="set-custom-rules" name="customRules" maxlength="1500" rows="5"
+                placeholder="Ex: Sempre terminar com uma pergunta. Nunca citar concorrentes pelo nome. Usar 'você' em vez de 'vocês'."></textarea>
+              <p class="hint">Suas regras são aplicadas abaixo das regras invioláveis e não podem sobrescrevê-las.</p>
+            </div>
+
+            <div class="row" style="justify-content: flex-end">
+              <button type="submit" class="btn btn--primary" id="btn-save-settings"><i data-lucide="save"></i>Salvar
+                diretrizes</button>
+            </div>
+          </form>
+
+          <aside class="stack" style="--gap: var(--space-5)">
+            <div class="card">
+              <div class="card__head">
+                <h2 class="card__title"><i data-lucide="server"></i>Status do servidor</h2>
+                <span class="badge" id="health-badge">verificando…</span>
+              </div>
+              <ul class="health" id="health-list">
+                <li><div class="skeleton skeleton-line"></div></li>
+                <li><div class="skeleton skeleton-line"></div></li>
+                <li><div class="skeleton skeleton-line"></div></li>
+              </ul>
+              <p class="hint" style="margin-top: var(--space-4)">
+                <i data-lucide="lock" style="display:inline; vertical-align:-2px"></i>
+                A chave do Gemini fica apenas nas variáveis de ambiente do servidor e nunca é enviada ao navegador.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card__head">
+                <h2 class="card__title"><i data-lucide="shield"></i>Regras invioláveis</h2>
+                <span class="badge badge--mono">read-only</span>
+              </div>
+              <ol class="core-rules" id="core-rules"></ol>
+            </div>
+
+            <details class="card prompt-preview">
+              <summary class="card__title"><i data-lucide="file-code-2"></i>Prévia do System Prompt final<i
+                  data-lucide="chevron-down" class="prompt-preview__chev"></i></summary>
+              <pre class="codeblock" id="prompt-preview" style="margin-top: var(--space-4)"></pre>
+            </details>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span class="subtle text-xs">© <span id="year">2026</span> NicePost. Todos os direitos reservados.</span>
+      <nav class="footer__links text-xs" aria-label="Links legais">
+        <a href="#">Termos de uso</a>
+        <a href="#">Privacidade</a>
+        <a href="mailto:contato@nicepost.app">Contato</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Barra inferior (mobile) -->
+  <nav class="tabbar" id="tabbar" aria-label="Navegação mobile">
+    <a href="#/" data-route="landing"><i data-lucide="home"></i><span>Início</span></a>
+    <a href="#/studio" data-route="studio"><i data-lucide="wand-sparkles"></i><span>Estúdio</span></a>
+    <a href="#/dashboard" data-route="dashboard"><i data-lucide="layout-dashboard"></i><span>Painel</span></a>
+    <a href="#/referrals" data-route="referrals"><i data-lucide="gift"></i><span>Indicar</span></a>
+    <a href="#/settings" data-route="settings"><i data-lucide="sliders-horizontal"></i><span>IA</span></a>
+  </nav>
+
+  <!-- ======================= MODAL: AUTENTICAÇÃO ======================= -->
+  <div class="modal" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title" hidden>
+    <div class="modal__dialog stack" style="--gap: var(--space-5)">
+      <button class="btn btn--icon btn--ghost modal__close" data-action="close-modal" aria-label="Fechar"><i
+          data-lucide="x"></i></button>
+
+      <div class="text-center stack" style="--gap: var(--space-2)">
+        <span class="brand__logo brand__logo--lg" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="9" fill="#fff" />
+            <path d="M10 22V10l12 12V10" stroke="#09090b" stroke-width="2.6" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </span>
+        <h2 id="auth-title">Bem-vindo ao NicePost</h2>
+        <p class="muted text-sm" id="auth-subtitle">Entre para continuar criando.</p>
+      </div>
+
+      <div class="tabs" role="tablist" style="--count: 2" id="auth-tabs">
+        <span class="tabs__indicator" aria-hidden="true"></span>
+        <button type="button" role="tab" aria-selected="true" data-tab="login" id="tab-login">Entrar</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="register" id="tab-register">Criar
+          conta</button>
+      </div>
+
+      <form id="auth-form" class="stack" novalidate>
+        <div class="field">
+          <label class="label" for="auth-email">E-mail</label>
+          <input class="input" type="email" id="auth-email" name="email" autocomplete="email" required
+            placeholder="voce@empresa.com">
+        </div>
+        <div class="field">
+          <label class="label" for="auth-password">Senha <small id="auth-password-hint">mín. 8
+              caracteres</small></label>
+          <div class="input-group">
+            <input class="input" type="password" id="auth-password" name="password" autocomplete="current-password"
+              required minlength="8" placeholder="••••••••">
+            <button type="button" class="input-group__btn" id="btn-toggle-password" aria-label="Mostrar senha"><i
+                data-lucide="eye"></i></button>
+          </div>
+        </div>
+        <div class="field" id="auth-plan-field" hidden>
+          <label class="label" for="auth-plan">Plano</label>
+          <select class="select" id="auth-plan" name="plan">
+            <option value="trial">Trial grátis — 3 posts</option>
+            <option value="essential">Essential — R$ 59,99/mês · 15 posts</option>
+            <option value="pro">Pro — R$ 99,99/mês · 25 posts</option>
+            <option value="ultra">Ultra — R$ 119,99/mês · 50 posts</option>
+          </select>
+          <p class="hint" id="auth-ref-hint" hidden><i data-lucide="gift" style="display:inline;vertical-align:-2px"></i>
+            Indicação aplicada: <b class="mono" id="auth-ref-code"></b></p>
+        </div>
+        <div class="form-error" id="auth-error" role="alert" hidden></div>
+        <button type="submit" class="btn btn--primary btn--lg btn--block" id="btn-auth-submit">Entrar</button>
+      </form>
+      <p class="subtle text-xs text-center">Ao continuar você concorda com os Termos de Uso e a Política de
+        Privacidade.</p>
+    </div>
+  </div>
+
+  <!-- ======================= MODAL: POST DO HISTÓRICO ======================= -->
+  <div class="modal modal--wide" id="post-modal" role="dialog" aria-modal="true" aria-labelledby="post-modal-title"
+    hidden>
+    <div class="modal__dialog stack" style="--gap: var(--space-4)">
+      <button class="btn btn--icon btn--ghost modal__close" data-action="close-modal" aria-label="Fechar"><i
+          data-lucide="x"></i></button>
+      <div>
+        <span class="eyebrow" id="post-modal-meta">—</span>
+        <h2 id="post-modal-title" class="text-lg">Post gerado</h2>
+      </div>
+      <p class="subtle text-xs" id="post-modal-prompt"></p>
+      <div class="output-text output-text--modal" id="post-modal-content"></div>
+      <div class="row" style="justify-content: flex-end">
+        <button class="btn" id="btn-post-modal-reuse"><i data-lucide="repeat"></i>Reusar briefing</button>
+        <button class="btn btn--primary" id="btn-post-modal-copy"><i data-lucide="copy"></i>Copiar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+</body>
+
+</html>
